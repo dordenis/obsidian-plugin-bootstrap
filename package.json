@@ -19,7 +19,16 @@
     "@typescript-eslint/parser": "latest",
     "builtin-modules": "latest",
     "esbuild": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-config-standard-with-typescript": "latest",
+    "eslint-import-resolver-typescript": "latest",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-modules-newlines": "latest",
+    "eslint-plugin-n": "latest",
+    "eslint-plugin-promise": "latest",
+    "eslint": "latest",
     "obsidian": "latest",
+    "prettier": "latest",
     "tslib": "latest",
     "typescript": "latest"
   }
