@@ -1,16 +1,17 @@
 // @ts-ignore
 import L from 'leaflet'
-import {template} from "leaflet/src/core/Util";
-import {Browser, extend} from "leaflet/dist/leaflet-src.esm";
 import * as fs from "fs";
 import * as path from "path";
 import axios from "axios";
 
-
 // @ts-ignore
+import {template} from "leaflet/src/core/Util";
+// @ts-ignore
+import {Browser, extend} from "leaflet/dist/leaflet-src.esm";
+
 export const StorageTileLayer = L.TileLayer.extend({
 
-	getTileUrl: function (coords: Object) {
+	getTileUrl(coords: Object) {
 		let data = {
 			r: Browser.retina ? '@2x' : '',
 			s: this._getSubdomain(coords),
@@ -19,7 +20,7 @@ export const StorageTileLayer = L.TileLayer.extend({
 			z: this._getZoomForUrl()
 		};
 
-		const path = `${this.options.setting.path}obsidian-gpx/cache/${data['z']}/${data['x']}/${data['y']}.png`
+		const path = `${this.options.setting.cacheFolder}${data['z']}/${data['x']}/${data['y']}.png`
 
 		if (this._map && !this._map.options.crs.infinite) {
 			var invertedY = this._globalTileRange.max.y - coords.y;

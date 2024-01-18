@@ -10,13 +10,12 @@ export default class MapGpxPlugin extends Plugin {
 	async onload() {
 		console.log("Load GPX plugin")
 
-		await this.loadSettings();
+		await this.loadSettings()
 
-		this.addSettingTab(new MapGpxTab(this.app, this));
+		this.addSettingTab(new MapGpxTab(this.app, this))
 
 		this.registerMarkdownCodeBlockProcessor("map",   async (source, el, ctx) => {
 			await this.loadMdSettings(source);
-
 
 			const map = new MapGpx(el, this.settings);
 
@@ -36,26 +35,15 @@ export default class MapGpxPlugin extends Plugin {
 
 	async loadMdSettings(source: string) {
 		this.settings = Object.assign({}, this.settings, await parseYaml(source));
-		this.settings.path = this.getAbsolutePath()
 	}
 
 	async saveSettings() {
 		await this.saveData(this.settings);
 	}
 
-	getAbsolutePath(): string {
-		let basePath;
-		let relativePath;
-		// base path
-		if (this.app.vault.adapter instanceof FileSystemAdapter) {
-			basePath = this.app.vault.adapter.getBasePath();
-		} else {
-			throw new Error('Cannot determine base path.');
-		}
-		// relative path
-		relativePath = `${this.app.vault.configDir}/plugins/`;
-		// absolute path
-		return `${basePath}/${relativePath}`
+	onunload() {
+		super.onunload();
+		console.log("Unload GPX plugin")
 	}
 
 }

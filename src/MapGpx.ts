@@ -1,7 +1,6 @@
 import {MapGpxSettings} from "./MapGpxSettings";
 import {MapGpxTrackProperty} from "./MapGpxTrackProperty";
 import {StorageTileLayer} from "./MapGpxStorageLayer";
-import {Vault} from "obsidian";
 
 // @ts-ignore
 import L from 'leaflet'
@@ -11,7 +10,6 @@ export class MapGpx {
 
 	private setting: MapGpxSettings
 	private el: HTMLElement
-	private vault: Vault
 
 	constructor(el: HTMLElement, setting: MapGpxSettings)
 	{
@@ -35,9 +33,12 @@ export class MapGpx {
 			attributionControl: false
 		});
 
-		//L.tileLayer(this.setting.service).addTo(map);
+		if (this.setting.cache) {
+			new StorageTileLayer(this.setting.service, {setting: this.setting}).addTo(map);
+		} else {
+			L.tileLayer(this.setting.service).addTo(map)
+		}
 
-		new StorageTileLayer(this.setting.service, {setting: this.setting}).addTo(map);
 		return map;
 	}
 
