@@ -1,21 +1,6 @@
 import esbuild from "esbuild";
 import process from "process";
 import builtins from "builtin-modules";
-import fs from "fs";
-
-const manifest = () => ({
-	name: 'manifest',
-	setup(build) {
-		build.onEnd(async () => {
-			try {
-				fs.renameSync('manifest.json', 'build/manifest.json');
-			} catch (e) {
-				console.error('Failed to rename file:', e);
-			}
-		});
-	},
-});
-
 
 const banner =
 `/*
@@ -25,7 +10,6 @@ if you want to view the source, please visit the github repository of this plugi
 `;
 
 const prod = (process.argv[2] === "production");
-const dir = prod ?  "./build/" : process.env.OBSIDIAN_CONFIG_DIR;
 
 const context = await esbuild.context({
 	banner: {
@@ -33,6 +17,7 @@ const context = await esbuild.context({
 	},
 	entryPoints: ["src/main.ts", "src/styles.css"],
 	bundle: true,
+	minify: true,
 	external: [
 		"obsidian",
 		"electron",
@@ -53,12 +38,18 @@ const context = await esbuild.context({
 	logLevel: "info",
 	sourcemap: prod ? false : "inline",
 	treeShaking: true,
-	outdir: dir,
-	loader: { ".png": "base64" },
-	plugins: [
-		manifest()
-	],
-
+	outdir: "./build",
+	loader: {
+		".png": "dataurl",
+		".jpg": "file",
+		'.js': 'jsx',
+		".svg": "base64",
+		".ttf": "file",
+		".node": "file",
+		".woff": "file",
+		".woff2": "file",
+		".data": "base64",
+	}
 });
 
 if (prod) {

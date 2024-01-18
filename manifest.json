@@ -1,10 +1,9 @@
 {
-  "id": "${PLUGIN_ID}",
-  "name": "${PLUGIN_NAME}",
-  "version": "1.0.0",
-  "minAppVersion": "0.15.0",
-  "description": "${PLUGIN_DESCRIPTION}",
-  "author": "${AUTHOR_GITHUB_NAME}",
-  "authorUrl": "https://github.com/${AUTHOR_GITHUB_NAME}",
-  "isDesktopOnly": true
+	"id": "map-gpx",
+	"name": "Map Gpx",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Visualizing gpx tracks",
+	"author": "Denis Doroshenko",
+	"isDesktopOnly": false
 }

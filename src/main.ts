@@ -1,1 +1,1 @@
-export {default} from "./${PLUGIN_CLASS_NAME}";
+export {default} from "./MapGpxPlugin";
