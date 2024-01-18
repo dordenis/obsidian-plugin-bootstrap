@@ -13,7 +13,7 @@ export interface MapGpxSettings {
 	endIconUrl: string
 	wptIconUrl: string
 	shadowUrl: string
-
+	trackFolder: string
 }
 
 export const DEFAULT_SETTINGS: Partial<MapGpxSettings> = {
